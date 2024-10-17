@@ -17,7 +17,14 @@
 public class BusStop {
 
     public static void main(String[] args) {
-        char[] a = char.parseChar(args[0]);
+
+        char[] a = new char [args.length];
+        for (int i = 0; i < args.length; i++) {
+            a[i] = args[i].charAt(0);
+            System.out.println(a[i]);
+            
+        }
+
 
         
 
