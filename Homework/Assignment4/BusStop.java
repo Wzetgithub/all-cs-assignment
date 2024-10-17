@@ -12,11 +12,14 @@
  * DO NOT add project statement
  * 
  */
+
+
 public class BusStop {
 
     public static void main(String[] args) {
+        char[] a = char.parseChar(args[0]);
 
-        // WRITE YOUR CODE HERE
+        
 
     }
 }
