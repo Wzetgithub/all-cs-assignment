@@ -17,16 +17,25 @@ public class EgyptianPyramid {
         int rows = Integer.parseInt(args[0]);
         int bricks = Integer.parseInt(args[1]);
         char[][] test = new char[rows][rows];
+        int count = 0;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j<rows; j++) {
-                if (bricks > 0) {
-                    test[i][j] = 'x';
+                if ((bricks > 0)&&(j<=rows-count-1)&&(j>=count)) {
+                    
+                        
+                    test[Math.abs(i-rows)-1][j] = 'x';
                     bricks--;
+
+                    
                 }
+                
                 else{
-                    test[i][j] = '=';
+                    test[Math.abs(i-rows)-1][j] = '=';
                 }
+
+
             }
+            count++;
         }
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j<rows; j++) {
