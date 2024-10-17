@@ -15,7 +15,8 @@ public class EgyptianPyramid {
     
     public static void main(String[] args) {
         int rows = Integer.parseInt(args[0]);
-        int bricks = Integer.parseInt(args[1]);
+        int b = Integer.parseInt(args[1]);
+        int bricks = b;
         char[][] test = new char[rows][rows];
         int count = 0;
         for (int i = 0; i < rows; i++) {
@@ -23,7 +24,7 @@ public class EgyptianPyramid {
                 if ((bricks > 0)&&(j<=rows-count-1)&&(j>=count)) {
                     
                         
-                    test[Math.abs(i-rows)-1][j] = 'x';
+                    test[Math.abs(i-rows)-1][j] = 'X';
                     bricks--;
 
                     
@@ -43,6 +44,7 @@ public class EgyptianPyramid {
             }
             System.out.println();
         }
+        System.out.println((bricks)+"_"+"Bricks"+"_"+"Remaining");
             
 
     }
