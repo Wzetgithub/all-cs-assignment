@@ -23,7 +23,56 @@ public class CharacterCounter {
 	StdOut.setFile(args[1]);
 	
 	// WRITE YOUR CODE HERE
+	char[] letters = new char[128];
+	int count = 0;
+	char[] fileSave = new char[99999999];
+	char x;
+	while (StdIn.hasNextChar()) {
+		x = StdIn.readChar();
+		count++;
+		fileSave[count]=x;
+	}
+
+	
+	for (int i = 0; i<letters.length; i++){
+		int k = 0;
+		letters[i]=((char)(i));
+		for (int j = 0; j<=count; j++) {
+			
+			if (letters[i] == fileSave[j]) {
+					k++;
+			}
+			
+			
+		}
+		if(i>=32&&i<=126) {
+			double rate = 100*((double)(k))/((double)(count));
+			StdOut.println(letters[i] + "," + i + "," + k + "," +rate);
+		}
+		// if (i>=32&&i<=126) {
+		// 	StdOut.println("[" + letters[i] + "],[" + i + "],[" + k + "],[" + (((double)(k/count))*100) + "]"	);
+		// }
+	}
+	
+	// while(StdIn.hasNextChar()){
+		
+	// 	count++;
+		
+	// }
+	// System.out.println("Done");
+	// for (int i=0; i>=letters.length;i++){
+	// 	if (i>36) {
+
+	// 	}
+	// 	for (int j=0; j>=letters.length;j++){
+	// 		if (letters[i]==letters[j]) {
+	// 			StdOut.print()
+	// 		}
+	// 	}
+		
+	// }
 
 
     }
+	
 }

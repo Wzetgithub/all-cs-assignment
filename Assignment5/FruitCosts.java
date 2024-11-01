@@ -22,6 +22,15 @@ public class FruitCosts {
 	// StdIn.readDouble, StdIn.readString() to read from the file
 	
 	// WRITE YOUR CODE HERE
-	
+
+    int count=0;
+    String[] spib = new String[999999];
+    double[] prices = new double[999999];
+    double numOfFruit=0.0;
+    System.out.println(
+        
+       
+
+
     }
 }

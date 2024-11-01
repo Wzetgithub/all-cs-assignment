@@ -1,1 +1,1 @@
-You are learning the first step of a very important compression algorithm.
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuzwxyz..1234567890/12''|[];
