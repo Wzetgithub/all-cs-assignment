@@ -24,10 +24,62 @@ public class FruitCosts {
 	// WRITE YOUR CODE HERE
 
     int count=0;
-    String[] spib = new String[999999];
-    double[] prices = new double[999999];
-    double numOfFruit=0.0;
-    System.out.println(
+    int numOfFruit=StdIn.readInt();
+    
+    String[] spib = new String[numOfFruit];
+    double[] prices = new double[numOfFruit];
+    for (int i=0; i<numOfFruit; i++) {
+
+        spib[i] = StdIn.readString();
+        prices[i] = StdIn.readDouble();
+    }
+    double temp;
+    String temp2;
+    for (int j = 0; j<prices.length; j++) {
+        for (int k = 0; k<prices.length-j; k++) {
+            // System.out.println(k+j);
+            if (prices[j]>prices[k+j]) {
+                // System.out.println("J is " + j);
+                // System.out.println("K is " + k);
+                // System.out.println("Prices[j] is " + prices[j]);
+                temp = prices[j];
+                temp2 = spib[j];
+                // System.out.println("temp is " + temp);
+                prices[j] = prices[k+j];
+                spib[j] = spib[k+j];
+                // System.out.println("k+j is " + prices[k+j]);
+                // System.out.println("New prices[j] is" + prices[j]);
+                prices[k+j] = temp;
+                spib[j+k] = temp2;
+                
+                // System.out.println("New prices[k] is " + prices[k]);
+            }
+            else;
+        }
+        
+        // System.out.println(prices[j]);
+        
+    }
+    double sum = 0;
+    for (int i = 0; i<=1; i++) {
+        System.out.println(spib[i] + " " + prices[i]);
+        sum+=prices[i];
+    }
+    
+    // System.out.println(sum);
+    // System.out.println(sum%.01);
+    double newSum = sum*100.0;
+    newSum+=.1;
+    newSum = (int) newSum;
+    newSum*=1.00;
+   newSum = newSum / 100.0;
+   newSum+=.00;
+   System.out.println("Total "+ newSum);
+    // double trueSum = Math.round(sum);
+    
+    // System.out.println("Total " + trueSum);
+    
+    
         
        
 
