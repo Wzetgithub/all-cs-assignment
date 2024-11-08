@@ -68,6 +68,6 @@ public class Matryoshka {
      * @param args command-line arguments
      */
     public static void main(String[] args){
-        stackDolls(Double.parseDouble(args[0]), Double.parseDouble(args[1]), Double.parseDouble(args[2]), Integer.parseInt(args[3]));
+        stackDolls(.1, .1, .1, Integer.parseInt(args[0]));
     }
 }
