@@ -33,7 +33,10 @@ public class Matryoshka {
      * @param  radius the radius of the doll's body
      */
     public static void drawDoll(double x, double y, double radius){
-        //WRITE YOUR CODE HERE
+       
+        StdDraw.circle(x, y, radius);
+        StdDraw.circle(x, y+(1.5*radius), .5*radius);
+        drawFace(x, y+(1.5*radius), radius);
     }
 
      /**
@@ -47,7 +50,15 @@ public class Matryoshka {
      * @param dolls the number of dolls to be drawn in succession
      */
     public static void stackDolls(double x, double y, double r, int dolls){
-        //WRITE YOUR CODE HERE
+        double coefficient = 5.0/7.0;
+        if(dolls!=0) {
+            drawDoll(x, y, r);
+            dolls--;
+            stackDolls(x+(r+(r*coefficient)),y, r*coefficient, dolls);
+
+        }
+        
+        
     }
 
     /**
@@ -57,6 +68,6 @@ public class Matryoshka {
      * @param args command-line arguments
      */
     public static void main(String[] args){
-        //WRITE YOUR CODE HERE
+        stackDolls(Double.parseDouble(args[0]), Double.parseDouble(args[1]), Double.parseDouble(args[2]), Integer.parseInt(args[3]));
     }
 }
