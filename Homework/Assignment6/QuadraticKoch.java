@@ -21,7 +21,22 @@ public class QuadraticKoch {
      *         Curve
      */
     public static double[][] getCoords(double x0, double y0, double x5, double y5) {
-        // WRITE YOUR CODE HERE
+        double dx = (x5-x0)/3.0;
+        double dy = (y5-y0)/3.0;
+        double x1 = x0 + dx;
+        double x2 = x1-dy;
+        double x3 = x2+dx;
+        double x4 = x3+dy;
+        double y1 = y0 + dy;
+        double y2 = y1+dx;
+        double y3 = y2+dy;
+        double y4 = y3-dx;
+        System.out.println(x0 + " " + x1 + " " + x2 + " " + x3 + " " + x4 + " "+x5 + " ");
+        double[][] gluh ={{x0, x1, x2,x3,x4,x5},{y0, y1, y2, y3, y4, y5}};
+        return gluh;
+
+
+        
     }
 
     /**
@@ -36,7 +51,20 @@ public class QuadraticKoch {
      * @param n  The current order
      */
     public static void koch(double x0, double y0, double x5, double y5, int n) {
-        // WRITE YOUR CODE HERE
+        if (n==0) {
+            StdDraw.line(x0,y0,x5,y5);
+        }
+        else {
+            
+            double[][] coords = getCoords(x0, y0, x5, y5);
+            koch(coords[0][0], coords[1][0], coords[0][1], coords[1][1], n-1);
+            koch(coords[0][1], coords[1][1], coords[0][2], coords[1][2], n-1);
+            koch(coords[0][2], coords[1][2], coords[0][3], coords[1][3], n-1);
+            koch(coords[0][3], coords[1][3], coords[0][4], coords[1][4], n-1);
+            koch(coords[0][4], coords[1][4], coords[0][5], coords[1][5], n-1);
+            
+
+        }
     }
 
     /**
@@ -47,6 +75,13 @@ public class QuadraticKoch {
      * @param args command-line arguments
      */
     public static void main(String[] args) {
-        // WRITE YOUR CODE HERE
+        int n = Integer.parseInt(args[0]);
+        koch(.25, .75, .75, .75, n);
+        koch(.75, .75, .75, .25, n);
+        koch(.75, .25, .25, .25, n);
+        koch(.25, .25, .25, .75, n);
+
+
+        
     }
 }
