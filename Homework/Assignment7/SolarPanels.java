@@ -48,7 +48,20 @@ public class SolarPanels {
      * @param parkingLotFile the lot input file to read
      */
     public void setupParkingLots(String parkingLotFile) {
-        // WRITE YOUR CODE HERE
+        StdIn.setFile(parkingLotFile);
+        int n = StdIn.readInt();
+        lots = new ParkingLot[n];
+        for (int i = 0; i<n; i++) {
+            
+            String lotName = StdIn.readString();
+            int maxPanels = StdIn.readInt();
+            double budget = StdIn.readDouble();
+            int energyCapacity = StdIn.readInt();
+            double panelEfficiency = StdIn.readDouble();
+            ParkingLot x = new ParkingLot(lotName, maxPanels, budget, energyCapacity, panelEfficiency);
+            lots[i]= x;
+            
+        }
     }
 
     /**
@@ -62,7 +75,39 @@ public class SolarPanels {
      * @param costPerPanel the fixed cost per panel, as a double
      */
     public void insertPanels(double costPerPanel) {
-        // WRITE YOUR CODE HERE
+        int l = streetMap.length;
+        int w = streetMap[0].length;
+        panels = new Panel[l][w];
+        int count = 0;
+        
+        for (int i = 0; i < lots.length; i++) {
+            double budg = lots[i].getBudget();
+            for(int j = 0; j<l; j++) {
+                for (int k = 0; k<w; k++) {
+                    if (lots[i].getLotName().equals(streetMap[j][k])) {
+                        if(budg-costPerPanel>=0) {
+                            if (count<=lots[i].getMaxPanels()) {
+                                double ratedEfficiency = lots[i].getPanelEfficiency();
+                                int maxOutput=lots[i].getEnergyCapacity();
+                                boolean works = true;
+                                if (StdRandom.uniform()>.95) {
+                                    works = false;
+                                }
+                                Panel test = new Panel(ratedEfficiency,maxOutput, works);
+
+                                panels[j][k]=test;
+                                budg-=costPerPanel;
+                            }
+
+                        }
+                    }
+                }
+            }
+
+
+
+        }
+
     }
 
     /**
@@ -78,7 +123,11 @@ public class SolarPanels {
      * @param coefficient the coefficient to use
      */
     public void updateActualEfficiency(int temperature, double coefficient) {
-        // WRITE YOUR CODE HERE
+        double drop = coefficient * (temperature-77);
+        for (int i=0; i<streetMap.length; i++) {
+            
+        }
+        
     }
 
     /**
