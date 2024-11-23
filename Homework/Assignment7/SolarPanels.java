@@ -187,21 +187,25 @@ public class SolarPanels {
      */
     public int countWorkingPanels(String parkingLot) {
         int count = 0;
-        for (int i = 0; i < lots.length; i++){
-           if (lots[i].getLotName().equals(parkingLot)) {
-            for (int j = i; j<streetMap.length; j++) {
-                for (int k = j; k <streetMap[j].length; k++) {
-                    if (panels[j][k] != null) {
-                        if (panels[j][k].isWorking()) {
-                            count++;
-                        }
+        for (int i = 0; i < streetMap.length; i++){
+            for (int j = 0; j<streetMap[0].length; j++){
+                // System.out.println(streetMap[0].length);
+                if (parkingLot.equals(streetMap[i][j]) ) {
+                    if (panels[i][j] != null &&panels[i][j].isWorking()) {
+                        count++;
 
                     }
-                    
                 }
-            } 
+            }
+            
+            
+
+                    
+                    
+                
+            
            }
-        }
+        
         
         return count; // PLACEHOLDER TO AVOID COMPILATION ERROR - REPLACE WITH YOUR CODE
     }
@@ -211,8 +215,21 @@ public class SolarPanels {
      * @return the count of working panels in total, after repair
      */
     public int updateWorkingPanels() {
-        // WRITE YOUR CODE HERE
-        return -1; // PLACEHOLDER TO AVOID COMPILATION ERROR - REPLACE WITH YOUR CODE
+        int workingPanels=0;
+        for (int i = 0; i < streetMap.length; i++){
+            for (int j = 0; j<streetMap[0].length; j++){
+                if(panels[i][j] != null) {
+                     panels[i][j].setIsWorking(true);
+                }
+               
+            }
+        }
+        for (int i = 0; i<lots.length;i++) {
+            workingPanels+=lots[i].getMaxPanels();
+
+        }
+
+        return workingPanels;
     }
 
     /**
@@ -226,8 +243,22 @@ public class SolarPanels {
      * RUN electricityGenerated before running this method.
      */
     public double calculateSavings() {
-        // WRITE YOUR CODE HERE
-        return -1; // PLACEHOLDER TO AVOID COMPILATION ERROR - REPLACE WITH YOUR CODE
+        double totalSavings = 0;
+        double totalEnergy = 0;
+        for (int i = 0; i < streetMap.length; i++){
+            for (int j = 0; j<streetMap[0].length; j++){
+                if(panels[i][j] != null) {
+                    totalEnergy+=panels[i][j].getElectricityGenerated();
+                }
+               
+            }
+        }
+        totalEnergy/=1000.0;
+        totalEnergy*=365.0;
+        totalEnergy/=4270000.0;
+        totalSavings=totalEnergy*60000000.0;
+        return totalSavings;
+        
     }
 
     /*
