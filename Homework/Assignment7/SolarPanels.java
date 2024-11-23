@@ -123,9 +123,22 @@ public class SolarPanels {
      * @param coefficient the coefficient to use
      */
     public void updateActualEfficiency(int temperature, double coefficient) {
+        double tempEf;
+        double actEf;
         double drop = coefficient * (temperature-77);
-        for (int i=0; i<streetMap.length; i++) {
-            
+        for (int k = 0; k < lots.length; k++){
+            for (int i=0; i<streetMap.length; i++) {
+                for (int j = 0; j<streetMap[i].length; j++) {
+                    if (panels[i][j] != null) {
+                        tempEf = panels[i][j].getRatedEfficiency();
+                        actEf = (tempEf-drop);
+                        panels[i][j].setActualEfficiency(actEf);
+
+                    }
+                    
+                }
+                
+            }
         }
         
     }
@@ -139,7 +152,31 @@ public class SolarPanels {
      * RUN updateActualEfficiency BEFORE running this method.
      */
     public void updateElectricityGenerated() {
-        // WRITE YOUR CODE HERE
+        double temp1;
+        double temp2;
+        double temp3;
+        double Final;
+        
+        for (int i = 0; i < lots.length; i++){
+            for (int j=0; j<streetMap.length; j++) {
+                for (int k = 0; k<streetMap[i].length; k++) {
+                    if ((panels[j][k] != null)&&panels[j][k].isWorking()) {
+                        
+                        temp1 = panels[j][k].getActualEfficiency();
+                        temp2= (temp1/100.0);
+                        temp3 = temp2*1500.0;
+                        Final= temp3*4;
+                        panels[j][k].setElectricityGenerated((int)Final);
+
+
+
+                    }
+                    
+                    
+                }
+                
+            }
+        }
     }
 
     /**
@@ -149,8 +186,24 @@ public class SolarPanels {
      * @return the number of working panels
      */
     public int countWorkingPanels(String parkingLot) {
-        // WRITE YOUR CODE HERE
-        return -1; // PLACEHOLDER TO AVOID COMPILATION ERROR - REPLACE WITH YOUR CODE
+        int count = 0;
+        for (int i = 0; i < lots.length; i++){
+           if (lots[i].getLotName().equals(parkingLot)) {
+            for (int j = i; j<streetMap.length; j++) {
+                for (int k = j; k <streetMap[j].length; k++) {
+                    if (panels[j][k] != null) {
+                        if (panels[j][k].isWorking()) {
+                            count++;
+                        }
+
+                    }
+                    
+                }
+            } 
+           }
+        }
+        
+        return count; // PLACEHOLDER TO AVOID COMPILATION ERROR - REPLACE WITH YOUR CODE
     }
 
     /**
