@@ -27,19 +27,6 @@ public class PlayMinesweeper {
      * Overloaded constructor: initalizes a Play Minesweeper object
      * based on a given 2D array of squares and the number of flags.
      * @param grid the 2D array of squares
-     * @param flagCount the flag count
-     */
-    public PlayMinesweeper(Square[][] grid, int flagCount) {
-        StdRandom.setSeed(2024);
-        this.grid = grid;
-        this.flagCount = flagCount;
-    }
-
-    /**
-     * DO NOT UPDATE OR REMOVE THIS METHOD
-     * Overloaded constructor: initalizes a Play Minesweeper object
-     * based on a given 2D array of squares and the number of flags.
-     * @param grid the 2D array of squares
      * @param totalMines the number of mines in the grid
      */
     public PlayMinesweeper(Square[][] grid, int totalMines) {
@@ -96,8 +83,28 @@ public class PlayMinesweeper {
      */
     public void placeMines(String inputFile) {
         StdIn.setFile(inputFile); // DO NOT REMOVE OR EDIT THIS LINE
+        int rows = StdIn.readInt();
+        int cols = StdIn.readInt();
+        StdIn.readLine();
+        grid = new Square[rows][cols];
+        for (int i = 0; i<rows; i++) {
+            for (int j = 0; j<cols; j++) {
+                grid[i][j] = new Square();
+            }
+        }
+        int i;
+        int j;
+        while(!StdIn.isEmpty()) {
+            i = StdIn.readInt();
+            j = StdIn.readInt();
+            StdIn.readLine();
+            grid[i][j].setSqNum(-1);
+            totalMines++;
+            // System.out.println(grid[i][j].getSqNum());
 
-        /* WRITE YOUR CODE HERE */
+        }
+
+       
     }
 
     /**
@@ -108,7 +115,36 @@ public class PlayMinesweeper {
      * of 0.
      */
     public void fillGrid() {
-        /* WRITE YOUR CODE HERE */
+        int mine;
+        
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                mine = 0;
+                if (grid[i][j].getSqNum()!=-1) {
+                    if (i-1>0&&j-1>=0&&grid[i-1][j-1].getSqNum()==-1) {
+                        mine++;
+                    }if (j-1>=0&&grid[i][j-1].getSqNum()==-1) {
+                        mine++;
+                    }if (i+1<grid.length&&j-1>=0&&grid[i+1][j-1].getSqNum()==-1) {
+                        mine++;
+                    }if (i-1>=0&&grid[i-1][j].getSqNum()==-1) {
+                        mine++;
+                    }if (i+1<grid.length&&grid[i+1][j].getSqNum()==-1) {
+                        mine++;
+                    }if (j+1<grid[i].length&&i-1>=0&&grid[i-1][j+1].getSqNum()==-1) {
+                        mine++;
+                    }if (j+1<grid[i].length&&grid[i][j+1].getSqNum()==-1) {
+                        mine++;
+                    }if (i+1<grid.length&&j+1<grid[i].length&&grid[i+1][j+1].getSqNum()==-1) {
+                        mine++;
+                    }
+                    
+                    grid[i][j].setSqNum(mine);
+                }
+                
+
+            }
+        }
     }
 
     /**
